@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="@dimen/spacing_xsmall"
+        android:layout_margin="@dimen/spacing_xsmall"
+        android:textAppearance="?android:attr/textAppearanceSmall">
+
+        <TextView
+            android:id="@+id/discipline_recycler_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_xsmall"
+            android:textColor="@android:color/black"
+            android:background="@android:color/white"
+            style="@style/TextAppearance.AppCompat.Body2" />
+
+        <TextView
+            android:id="@+id/discipline_recycler_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:padding="@dimen/spacing_xsmall"
+            android:layout_below="@+id/discipline_recycler_name"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ff828282" />
+
+        <TextView
+            android:id="@+id/discipline_recycler_shots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:textColor="@android:color/black"
+            android:padding="@dimen/spacing_xsmall"
+            android:layout_alignBottom="@+id/discipline_recycler_name"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            style="@style/TextAppearance.AppCompat.Body2" />
+
+        <TextView
+            android:id="@+id/discipline_recycler_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:padding="@dimen/spacing_xsmall"
+            android:layout_below="@+id/discipline_recycler_shots"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ff828282" />
+
+    </RelativeLayout>
+
+</FrameLayout>

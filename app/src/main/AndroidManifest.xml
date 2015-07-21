@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="manschwa.shootinglog" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_sl"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".discipline.DisciplineListActivity"
+            android:label="@string/disciplines" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".discipline.DisciplineNewActivity"
+            android:label="@string/newDiscipline" >
+            android:parentActivityName=".DisciplineListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".discipline.DisciplineListActivity"/>
+        </activity>
+    </application>
+
+</manifest>

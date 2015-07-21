@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Red and Light Blue color scheme -->
+    <!--color name="primary">#D32F2F</color>
+    <color name="primary_light">#E57373</color>
+    <color name="primary_dark">#B71C1C</color>
+    <color name="accent">#00E5FF</color>
+    <color name="text_primary">#D9FFFFFF</color>
+    <color name="text_secondary">#D9000000</color-->
+
+    <!-- Cyan and red color scheme -->
+    <!--color name="primary">#00BCD4</color>
+    <color name="primary_light">#B2EBF2</color>
+    <color name="primary_dark">#00838F</color>
+    <color name="accent">#FF1744</color>
+    <color name="text_primary">#D9FFFFFF</color>
+    <color name="text_secondary">#D9000000</color-->
+
+    <!-- Brown and dark orange color scheme -->
+    <color name="primary">#795548</color>
+    <color name="primary_light">#D7CCC8</color>
+    <color name="primary_dark">#4E342E</color>
+    <color name="accent">#FF3D00</color>
+    <color name="accent_light">#FF6E40</color>
+    <color name="white">#FFFFFF</color>
+    <color name="text_primary">#D9FFFFFF</color>
+    <color name="text_secondary">#D9000000</color>
+    <color name="black">#000000</color>
+</resources>

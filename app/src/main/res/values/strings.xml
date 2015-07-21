@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Shooting Log</string>
+    <string name="discipline">Discipline</string>
+    <string name="disciplines">Disciplines</string>
+    <string name="result">Result</string>
+    <string name="results">Results</string>
+    <string name="weapons">Weapons</string>
+    <string name="weapon">Weapon</string>
+    <string name="ammunition">Ammunition</string>
+    <string name="event">Event</string>
+    <string name="events">Events</string>
+    <string name="locations">Locations</string>
+    <string name="location">Location</string>
+    <string name="manufacturer">Manufacturer</string>
+    <string name="manufacturers">Manufacturers</string>
+    <string name="action_settings">Settings</string>
+    <string name="DisciplineID">DisciplineID</string>
+    <string name="Not_assigned">Not assigned</string>
+    <string name="name">Name</string>
+    <string name="total_shots">Total Shots</string>
+    <string name="number_of_passes">Number of passes</string>
+    <string name="time_in_minutes">Time</string>
+    <string name="distance_in_meters">Distance</string>
+    <string name="infos">Infos</string>
+    <string name="minutes_min">Min</string>
+    <string name="meters_m">m</string>
+    <string name="add_string">Add</string>
+    <string name="find_string">Find</string>
+    <string name="delete_string">Delete</string>
+    <string name="settings">Settings</string>
+    <string name="newDiscipline">New Discipline</string>
+</resources>
