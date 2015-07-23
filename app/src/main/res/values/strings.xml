@@ -29,4 +29,6 @@
     <string name="delete_string">Delete</string>
     <string name="settings">Settings</string>
     <string name="newDiscipline">New Discipline</string>
+    <string name="comments">Comments</string>
+    <string name="notes">Notes</string>
 </resources>

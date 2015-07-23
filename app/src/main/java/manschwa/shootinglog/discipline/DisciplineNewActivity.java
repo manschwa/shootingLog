@@ -82,7 +82,7 @@ public class DisciplineNewActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.menu_my, menu);
 
-        content = findViewById(R.id.discipline_new_frame_layout);
+        content = findViewById(R.id.discipline_new_coordinator_layout);
 
         return true;
     }

@@ -121,6 +121,7 @@ public class DisciplineListActivity extends AppCompatActivity implements Discipl
         Intent intent = new Intent(DisciplineListActivity.this, DisciplineNewActivity.class);
         intent.putExtra("Discipline", discipline);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.scale_in);
 //        Snackbar.make(content, discipline.getName() + " pressed", Snackbar.LENGTH_LONG).show();
 //        DisciplineNewActivity.navigate(this, view.findViewById(R.id.image), viewModel);
     }
