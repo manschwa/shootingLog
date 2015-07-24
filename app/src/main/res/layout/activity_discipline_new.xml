@@ -230,20 +230,20 @@
             </TableLayout>
 
 
-            <LinearLayout
+            <!--LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_margin="20dp"
                 android:orientation="horizontal"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
 
-                <Button
+                <!--Button
                     android:id="@+id/button_add_discipline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="newDiscipline"
-                    android:text="@string/add_string" />
+                    android:text="@string/add_string" /-->
 
                 <!--Button
                     android:layout_width="wrap_content"
@@ -252,14 +252,14 @@
                     android:id="@+id/button_find_discipline"
                     android:onClick="lookupDiscipline"/-->
 
-                <Button
+                <!--Button
                     android:id="@+id/button_delete_discipline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="removeDiscipline"
-                    android:text="@string/delete_string" />
+                    android:text="@string/delete_string" /-->
 
-            </LinearLayout>
+            <!--/LinearLayout-->
         </LinearLayout>
     </ScrollView>
 

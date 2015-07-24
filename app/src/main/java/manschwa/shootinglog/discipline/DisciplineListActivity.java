@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,8 +26,9 @@ import manschwa.shootinglog.R;
 public class DisciplineListActivity extends AppCompatActivity implements DisciplineListAdapter.OnItemClickListener {
 
     private List<Discipline> disciplines = new ArrayList<Discipline>();
-
+    private Toolbar toolbar;
     private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
     private View content;
 
     @Override
@@ -75,25 +77,30 @@ public class DisciplineListActivity extends AppCompatActivity implements Discipl
     }
 
     private void initToolbar() {
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black);
+//            actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+//            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black);
+
         }
     }
 
     private List<Discipline> getAllDisciplines() {
-
         DisciplineDatabaseHelper disciplineDatabaseHelper = new DisciplineDatabaseHelper(this);
-
         return disciplineDatabaseHelper.findAllDisciplines();
     }
 
     private void setupDrawerLayout() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle( this,  drawerLayout, toolbar,
+                            R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
 
         NavigationView view = (NavigationView) findViewById(R.id.navigation_view);
         view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

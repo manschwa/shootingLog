@@ -31,4 +31,8 @@
     <string name="newDiscipline">New Discipline</string>
     <string name="comments">Comments</string>
     <string name="notes">Notes</string>
+    <string name="navigation_drawer_open">Drawer is open</string>
+    <string name="navigation_drawer_close">Drawer is closed</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_done">Done</string>
 </resources>

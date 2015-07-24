@@ -25,9 +25,6 @@ public class DisciplineNewActivity extends AppCompatActivity {
     EditText distanceInMetersBox;
     EditText infosBox;
 
-    private View content;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +46,6 @@ public class DisciplineNewActivity extends AppCompatActivity {
         if (intent.hasExtra("Discipline")) {
 
             Discipline discipline = (Discipline) intent.getSerializableExtra("Discipline");
-            System.out.println("DisciplineID: " + discipline.getID());
 
             disciplineIdView.setText(String.valueOf(discipline.getID()));
             disciplineNameBox.setText(String.valueOf(discipline.getName()));
@@ -70,8 +66,6 @@ public class DisciplineNewActivity extends AppCompatActivity {
         final ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
-            //actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black);
-
             // Enables the Up-Navigation and replaces the home button with a reverse arrow
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -80,11 +74,8 @@ public class DisciplineNewActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_my, menu);
-
-        content = findViewById(R.id.discipline_new_coordinator_layout);
-
-        return true;
+        getMenuInflater().inflate(R.menu.menu_edit, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -94,14 +85,50 @@ public class DisciplineNewActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_delete:
+                if (getIntent().hasExtra("Discipline")) {
+                    deleteDiscipline();
+                    return true;
+                }
+                return false;
+            case R.id.action_done:
+                if (getIntent().hasExtra("Discipline")) {
+                    // TODO implement updateDiscipline().
+//                    updateDiscipline();
+                } else {
+                    // TODO implement Pickers with default values.
+                    createDiscipline();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
+    public void createDiscipline () {
+        DisciplineDatabaseHelper disciplineDatabaseHelper = new DisciplineDatabaseHelper(this);
+
+        String name = disciplineNameBox.getText().toString().trim();
+        int totalShots = Integer.parseInt(totalShotsBox.getText().toString());
+        int passes = Integer.parseInt(numberOfPassesBox.getText().toString());
+        int minutes = Integer.parseInt(timeInMinutesBox.getText().toString());
+        int meters = Integer.parseInt(distanceInMetersBox.getText().toString());
+        String infos = infosBox.getText().toString().trim();
+
+        Discipline discipline = new Discipline(name, totalShots, passes, minutes, meters, infos);
+
+        disciplineDatabaseHelper.addDiscipline(discipline);
+        disciplineNameBox.setText("");
+        totalShotsBox.setText("");
+        numberOfPassesBox.setText("");
+        timeInMinutesBox.setText("");
+        distanceInMetersBox.setText("");
+        infosBox.setText("");
+
+        // same functionality as the back arrow button (starts the previous activity new)
+        NavUtils.navigateUpFromSameTask(this);
+    }
 
     public void newDiscipline (View view) {
         DisciplineDatabaseHelper disciplineDatabaseHelper = new DisciplineDatabaseHelper(this);
@@ -123,6 +150,7 @@ public class DisciplineNewActivity extends AppCompatActivity {
         distanceInMetersBox.setText("");
         infosBox.setText("");
 
+        // same functionality as the back arrow button (starts the previous activity new)
         NavUtils.navigateUpFromSameTask(this);
     }
 
@@ -144,7 +172,24 @@ public class DisciplineNewActivity extends AppCompatActivity {
             disciplineIdView.setText("No Match Found");
         }
     }
+    private void deleteDiscipline () {
+        DisciplineDatabaseHelper disciplineDatabaseHelper = new DisciplineDatabaseHelper(this);
 
+        boolean result = disciplineDatabaseHelper.deleteDiscipline(Integer.parseInt(disciplineIdView.getText().toString().trim()));
+
+        if (result)
+        {
+            disciplineIdView.setText("Record Deleted");
+            disciplineNameBox.setText("");
+            totalShotsBox.setText("");
+            numberOfPassesBox.setText("");
+            timeInMinutesBox.setText("");
+            distanceInMetersBox.setText("");
+            infosBox.setText("");
+        }
+        else
+            disciplineIdView.setText("Record not deleted.");
+    }
     public void removeDiscipline (View view) {
         DisciplineDatabaseHelper disciplineDatabaseHelper = new DisciplineDatabaseHelper(this);
 
