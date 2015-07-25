@@ -68,7 +68,7 @@ public class DisciplineListActivity extends AppCompatActivity implements Discipl
         findViewById(R.id.fab_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DisciplineListActivity.this, DisciplineNewActivity.class);
+                Intent intent = new Intent(DisciplineListActivity.this, DisciplineEditActivity.class);
 
                 startActivity(intent);
                 //Snackbar.make(content, "FAB Clicked", Snackbar.LENGTH_SHORT).show();
@@ -97,18 +97,33 @@ public class DisciplineListActivity extends AppCompatActivity implements Discipl
 
     private void setupDrawerLayout() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle( this,  drawerLayout, toolbar,
-                            R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
+        // define the behaviour if clicked on a Drawer Layout Button
         NavigationView view = (NavigationView) findViewById(R.id.navigation_view);
         view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override public boolean onNavigationItemSelected(MenuItem menuItem) {
-                Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
-                menuItem.setChecked(true);
-                drawerLayout.closeDrawers();
-                return true;
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.drawer_disciplines:
+                        drawerLayout.openDrawer(GravityCompat.START);
+                        Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        return true;
+                    case R.id.drawer_settings:
+                        drawerLayout.openDrawer(GravityCompat.START);
+                        Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        return true;
+                    default:
+                        return false;
+                }
+
             }
         });
     }
@@ -125,11 +140,11 @@ public class DisciplineListActivity extends AppCompatActivity implements Discipl
     }
 
     @Override public void onItemClick(View view, Discipline discipline) {
-        Intent intent = new Intent(DisciplineListActivity.this, DisciplineNewActivity.class);
+        Intent intent = new Intent(DisciplineListActivity.this, DisciplineEditActivity.class);
         intent.putExtra("Discipline", discipline);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.scale_in);
 //        Snackbar.make(content, discipline.getName() + " pressed", Snackbar.LENGTH_LONG).show();
-//        DisciplineNewActivity.navigate(this, view.findViewById(R.id.image), viewModel);
+//        DisciplineEditActivity.navigate(this, view.findViewById(R.id.image), viewModel);
     }
 }

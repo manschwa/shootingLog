@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class DisciplineDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addDiscipline(Discipline discipline) {
+    public ContentValues setValues(Discipline discipline) {
 
         ContentValues values = new ContentValues();
         values.put(DatabaseContract.Discipline.COLUMN_NAME_NAME, discipline.getName());
@@ -42,6 +43,12 @@ public class DisciplineDatabaseHelper extends SQLiteOpenHelper {
         values.put(DatabaseContract.Discipline.COLUMN_NAME_DISTANCE_IN_METERS, discipline.getDistanceInMeters());
         values.put(DatabaseContract.Discipline.COLUMN_NAME_INFOS, discipline.getInfos());
 
+        return values;
+    }
+
+    public void addDiscipline(Discipline discipline) {
+
+        ContentValues values = setValues(discipline);
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.insert(DatabaseContract.Discipline.TABLE_NAME, null, values);
@@ -152,7 +159,7 @@ public class DisciplineDatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             discipline.setID(Integer.parseInt(cursor.getString(0)));
             db.delete(DatabaseContract.Discipline.TABLE_NAME, DatabaseContract.Discipline.COLUMN_NAME_DISCIPLINE_ID + " = ?",
-                    new String[] { String.valueOf(discipline.getID()) });
+                    new String[]{String.valueOf(discipline.getID())});
             cursor.close();
             result = true;
         }
@@ -160,12 +167,23 @@ public class DisciplineDatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public boolean updateDiscipline(Discipline discipline) {
+        ContentValues values = setValues(discipline);
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int update = db.update(DatabaseContract.Discipline.TABLE_NAME, values, DatabaseContract.Discipline.COLUMN_NAME_DISCIPLINE_ID + " = ?",
+                new String[]{String.valueOf(discipline.getID())});
+
+        return update == 1;
+
+    }
+
     public boolean deleteDiscipline(int disciplineID) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        int delete  = db.delete(DatabaseContract.Discipline.TABLE_NAME, DatabaseContract.Discipline.COLUMN_NAME_DISCIPLINE_ID + " = ?",
-                new String[] { String.valueOf(disciplineID) });
+        int delete = db.delete(DatabaseContract.Discipline.TABLE_NAME, DatabaseContract.Discipline.COLUMN_NAME_DISCIPLINE_ID + " = ?",
+                new String[]{String.valueOf(disciplineID)});
 
         db.close();
         return delete == 1;
