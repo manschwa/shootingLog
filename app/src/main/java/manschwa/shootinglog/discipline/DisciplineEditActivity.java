@@ -1,7 +1,9 @@
 package manschwa.shootinglog.discipline;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +14,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import manschwa.shootinglog.DeleteDialogFragment;
 import manschwa.shootinglog.R;
 
 
-public class DisciplineEditActivity extends AppCompatActivity {
+public class DisciplineEditActivity extends AppCompatActivity implements DeleteDialogFragment.DeleteDialogListener {
 
     private final String INTENT_DISCIPLINE = "Discipline";
+
+    private boolean intentDiscipline;
+
     private TextView disciplineIdView;
     private EditText disciplineNameBox;
     private EditText totalShotsBox;
@@ -32,6 +38,9 @@ public class DisciplineEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discipline_edit);
 
+        Intent intent = getIntent();
+        this.intentDiscipline = intent.hasExtra(INTENT_DISCIPLINE);
+
         initToolbar();
 
         disciplineIdView = (TextView) findViewById(R.id.disciplineID);
@@ -42,10 +51,8 @@ public class DisciplineEditActivity extends AppCompatActivity {
         distanceInMetersBox = (EditText) findViewById(R.id.disciplineDistanceInMeters);
         infosBox = (EditText) findViewById(R.id.disciplineInfos);
 
-        Intent intent = getIntent();
-
         // fill up the Views if there is a Discipline in the given Intent
-        if (intent.hasExtra(INTENT_DISCIPLINE)) {
+        if (this.intentDiscipline) {
             Discipline discipline = (Discipline) intent.getSerializableExtra(INTENT_DISCIPLINE);
             fillViews(discipline);
         } else {
@@ -63,6 +70,11 @@ public class DisciplineEditActivity extends AppCompatActivity {
         if (actionBar != null) {
             // Enables the Up-Navigation and replaces the home button with a reverse arrow
             actionBar.setDisplayHomeAsUpEnabled(true);
+            if (this.intentDiscipline) {
+                actionBar.setTitle("Edit Discipline");
+            } else {
+                actionBar.setTitle("New Discipline");
+            }
         }
     }
 
@@ -79,7 +91,7 @@ public class DisciplineEditActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        if (getIntent().hasExtra("Discipline")) {
+        if (this.intentDiscipline) {
             getMenuInflater().inflate(R.menu.menu_edit, menu);
         } else {
             getMenuInflater().inflate(R.menu.menu_new, menu);
@@ -95,7 +107,7 @@ public class DisciplineEditActivity extends AppCompatActivity {
         int id = item.getItemId();
         Discipline discipline;
 
-        if (getIntent().hasExtra(INTENT_DISCIPLINE)) {
+        if (this.intentDiscipline) {
             discipline = (Discipline) getIntent().getSerializableExtra(INTENT_DISCIPLINE);
         } else {
             discipline = null;
@@ -103,13 +115,15 @@ public class DisciplineEditActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.action_delete:
-                if (discipline != null) {
-                    deleteDiscipline(discipline.getID());
-                    return true;
-                }
-                return false;
+                showDeleteDialog();
+                return true;
+//                if (discipline != null) {
+//                    deleteDiscipline(discipline.getID());
+//                    return true;
+//                }
+//                return false;
             case R.id.action_done:
-                if (getIntent().hasExtra(INTENT_DISCIPLINE)) {
+                if (this.intentDiscipline) {
                     updateDiscipline(discipline);
                 } else {
                     // TODO implement Pickers with default values.
@@ -119,6 +133,28 @@ public class DisciplineEditActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void showDeleteDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new DeleteDialogFragment();
+        dialog.show(getFragmentManager(), "DeleteDialogFragment");
+    }
+
+    // The dialog fragment receives a reference to this Activity through the
+    // Fragment.onAttach() callback, which it uses to call the following methods
+    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        // User touched the dialog's positive button: delete Discipline
+        int id = ((Discipline) getIntent().getSerializableExtra(INTENT_DISCIPLINE)).getID();
+        deleteDiscipline(id);
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        // User touched the dialog's negative button
+        // do nothing
     }
 
     public void createDiscipline () {
@@ -206,20 +242,10 @@ public class DisciplineEditActivity extends AppCompatActivity {
     private void deleteDiscipline (int id) {
         DisciplineDatabaseHelper disciplineDatabaseHelper = new DisciplineDatabaseHelper(this);
 
-        boolean result = disciplineDatabaseHelper.deleteDiscipline(id);
-
-        if (result)
-        {
-            disciplineIdView.setText("Record Deleted");
-            disciplineNameBox.setText("");
-            totalShotsBox.setText("");
-            numberOfPassesBox.setText("");
-            timeInMinutesBox.setText("");
-            distanceInMetersBox.setText("");
-            infosBox.setText("");
-        }
-        else
-            disciplineIdView.setText("Record not deleted.");
+        disciplineDatabaseHelper.deleteDiscipline(id);
+        
+        // same functionality as the back arrow button (starts the previous activity new)
+        NavUtils.navigateUpFromSameTask(this);
     }
 
     public void removeDiscipline (View view) {
