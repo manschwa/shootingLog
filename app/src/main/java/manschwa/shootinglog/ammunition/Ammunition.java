@@ -28,6 +28,8 @@ public class Ammunition {
         this.name = name;
     }
 
+    public Ammunition() {}
+
     public int getID() {
         return id;
     }

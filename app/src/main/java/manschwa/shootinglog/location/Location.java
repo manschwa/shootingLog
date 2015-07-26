@@ -20,6 +20,10 @@ public class Location {
         this.address = address;
     }
 
+    public Location() {
+
+    }
+
     public int getID() {
         return id;
     }

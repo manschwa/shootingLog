@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 import manschwa.shootinglog.DatabaseContract;
-import manschwa.shootinglog.discipline.Discipline;
 
 /**
  * Created by Manuel on 04.07.15.
  */
 public class DisciplineDatabaseHelper extends SQLiteOpenHelper {
+
     public DisciplineDatabaseHelper(Context context) {
         super(context, DatabaseContract.DATABASE_NAME, null, DatabaseContract.DATABASE_VERSION);
     }
@@ -143,30 +143,6 @@ public class DisciplineDatabaseHelper extends SQLiteOpenHelper {
         return disciplines;
     }
 
-    public boolean deleteDiscipline(String disciplineName) {
-
-        boolean result = false;
-
-        String query = "Select * FROM " + DatabaseContract.Discipline.TABLE_NAME +
-                " WHERE " + DatabaseContract.Discipline.COLUMN_NAME_NAME + " =  \"" + disciplineName + "\"";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        Discipline discipline = new Discipline();
-
-        if (cursor.moveToFirst()) {
-            discipline.setID(Integer.parseInt(cursor.getString(0)));
-            db.delete(DatabaseContract.Discipline.TABLE_NAME, DatabaseContract.Discipline.COLUMN_NAME_DISCIPLINE_ID + " = ?",
-                    new String[]{String.valueOf(discipline.getID())});
-            cursor.close();
-            result = true;
-        }
-        db.close();
-        return result;
-    }
-
     public boolean updateDiscipline(Discipline discipline) {
         ContentValues values = setValues(discipline);
         SQLiteDatabase db = this.getWritableDatabase();
@@ -175,7 +151,6 @@ public class DisciplineDatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(discipline.getID())});
 
         return update == 1;
-
     }
 
     public boolean deleteDiscipline(int disciplineID) {

@@ -25,6 +25,10 @@ public class Event {
         this.name = name;
     }
 
+    public Event() {
+
+    }
+
     public int getID() {
         return id;
     }

@@ -37,4 +37,5 @@
     <string name="action_done">Done</string>
     <string name="dialog_delete_discipline">Really delete this Discipline?</string>
     <string name="cancel">Cancel</string>
+    <string name="dialog_delete_entry">Really delete this entry?</string>
 </resources>

@@ -21,7 +21,7 @@ public class DeleteDialogFragment extends DialogFragment {
     }
 
     // Use this instance of the interface to deliver action events
-    DeleteDialogListener mListener;
+    DeleteDialogListener deleteDialogListener;
 
     // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
     @Override
@@ -30,7 +30,7 @@ public class DeleteDialogFragment extends DialogFragment {
         // Verify that the host activity implements the callback interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
-            mListener = (DeleteDialogListener) activity;
+            deleteDialogListener = (DeleteDialogListener) activity;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(activity.toString()
@@ -42,17 +42,17 @@ public class DeleteDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Build the dialog and set up the button click handlers
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.dialog_delete_discipline)
+        builder.setMessage(R.string.dialog_delete_entry)
                 .setPositiveButton(R.string.delete_string, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the positive button event back to the host activity
-                        mListener.onDialogPositiveClick(DeleteDialogFragment.this);
+                        deleteDialogListener.onDialogPositiveClick(DeleteDialogFragment.this);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the negative button event back to the host activity
-                        mListener.onDialogNegativeClick(DeleteDialogFragment.this);
+                        deleteDialogListener.onDialogNegativeClick(DeleteDialogFragment.this);
                     }
                 });
         return builder.create();

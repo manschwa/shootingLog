@@ -19,6 +19,10 @@ public class Manufacturer {
         this.name = name;
     }
 
+    public Manufacturer() {
+
+    }
+
     public int getID() {
         return id;
     }

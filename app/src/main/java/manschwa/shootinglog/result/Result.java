@@ -24,7 +24,7 @@ public class Result {
     private Ammunition ammunition;
     private String notes;
 
-//     TODO incorperate picture/photography of the result
+//     TODO incorporate picture/photography of the result
 //     private Object picture;
 
     public Result(int id, Date date, Discipline discipline, int[] passes, int result, Event event, Location location, Weapon weapon, Ammunition ammunition, String notes) {

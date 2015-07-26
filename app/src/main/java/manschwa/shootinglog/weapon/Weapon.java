@@ -26,6 +26,10 @@ public class Weapon {
         this(0, serialNumber, manufacturer, model);
     }
 
+    public Weapon() {
+
+    }
+
     public void setID(int id) {
         this.id = id;
     }

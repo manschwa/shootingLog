@@ -3,7 +3,6 @@ package manschwa.shootinglog.discipline;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -42,14 +41,7 @@ public class DisciplineEditActivity extends AppCompatActivity implements DeleteD
         this.intentDiscipline = intent.hasExtra(INTENT_DISCIPLINE);
 
         initToolbar();
-
-        disciplineIdView = (TextView) findViewById(R.id.disciplineID);
-        disciplineNameBox = (EditText) findViewById(R.id.disciplineName);
-        totalShotsBox = (EditText) findViewById(R.id.disciplineTotalShots);
-        numberOfPassesBox = (EditText) findViewById(R.id.disciplineNumberOfPasses);
-        timeInMinutesBox = (EditText) findViewById(R.id.disciplineTimeInMinutes);
-        distanceInMetersBox = (EditText) findViewById(R.id.disciplineDistanceInMeters);
-        infosBox = (EditText) findViewById(R.id.disciplineInfos);
+        initViews();
 
         // fill up the Views if there is a Discipline in the given Intent
         if (this.intentDiscipline) {
@@ -58,6 +50,16 @@ public class DisciplineEditActivity extends AppCompatActivity implements DeleteD
         } else {
             disciplineIdView.setText("New Discipline");
         }
+    }
+
+    private void initViews() {
+        disciplineIdView = (TextView) findViewById(R.id.disciplineID);
+        disciplineNameBox = (EditText) findViewById(R.id.disciplineName);
+        totalShotsBox = (EditText) findViewById(R.id.disciplineTotalShots);
+        numberOfPassesBox = (EditText) findViewById(R.id.disciplineNumberOfPasses);
+        timeInMinutesBox = (EditText) findViewById(R.id.disciplineTimeInMinutes);
+        distanceInMetersBox = (EditText) findViewById(R.id.disciplineDistanceInMeters);
+        infosBox = (EditText) findViewById(R.id.disciplineInfos);
     }
 
 
@@ -117,11 +119,6 @@ public class DisciplineEditActivity extends AppCompatActivity implements DeleteD
             case R.id.action_delete:
                 showDeleteDialog();
                 return true;
-//                if (discipline != null) {
-//                    deleteDiscipline(discipline.getID());
-//                    return true;
-//                }
-//                return false;
             case R.id.action_done:
                 if (this.intentDiscipline) {
                     updateDiscipline(discipline);
@@ -143,7 +140,7 @@ public class DisciplineEditActivity extends AppCompatActivity implements DeleteD
 
     // The dialog fragment receives a reference to this Activity through the
     // Fragment.onAttach() callback, which it uses to call the following methods
-    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+    // defined by the DeleteDialogFragment.DeleteDialogListener interface
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         // User touched the dialog's positive button: delete Discipline
@@ -197,30 +194,6 @@ public class DisciplineEditActivity extends AppCompatActivity implements DeleteD
         NavUtils.navigateUpFromSameTask(this);
     }
 
-    public void newDiscipline (View view) {
-        DisciplineDatabaseHelper disciplineDatabaseHelper = new DisciplineDatabaseHelper(this);
-
-        String name = disciplineNameBox.getText().toString().trim();
-        int totalShots = Integer.parseInt(totalShotsBox.getText().toString());
-        int passes = Integer.parseInt(numberOfPassesBox.getText().toString());
-        int minutes = Integer.parseInt(timeInMinutesBox.getText().toString());
-        int meters = Integer.parseInt(distanceInMetersBox.getText().toString());
-        String infos = infosBox.getText().toString().trim();
-
-        Discipline discipline = new Discipline(name, totalShots, passes, minutes, meters, infos);
-
-        disciplineDatabaseHelper.addDiscipline(discipline);
-        disciplineNameBox.setText("");
-        totalShotsBox.setText("");
-        numberOfPassesBox.setText("");
-        timeInMinutesBox.setText("");
-        distanceInMetersBox.setText("");
-        infosBox.setText("");
-
-        // same functionality as the back arrow button (starts the previous activity new)
-        NavUtils.navigateUpFromSameTask(this);
-    }
-
     public void lookupDiscipline(View view) {
         DisciplineDatabaseHelper disciplineDatabaseHelper = new DisciplineDatabaseHelper(this);
 
@@ -239,31 +212,14 @@ public class DisciplineEditActivity extends AppCompatActivity implements DeleteD
             disciplineIdView.setText("No Match Found");
         }
     }
+
     private void deleteDiscipline (int id) {
         DisciplineDatabaseHelper disciplineDatabaseHelper = new DisciplineDatabaseHelper(this);
 
         disciplineDatabaseHelper.deleteDiscipline(id);
-        
+
         // same functionality as the back arrow button (starts the previous activity new)
         NavUtils.navigateUpFromSameTask(this);
     }
 
-    public void removeDiscipline (View view) {
-        DisciplineDatabaseHelper disciplineDatabaseHelper = new DisciplineDatabaseHelper(this);
-
-        boolean result = disciplineDatabaseHelper.deleteDiscipline(Integer.parseInt(disciplineIdView.getText().toString().trim()));
-
-        if (result)
-        {
-            disciplineIdView.setText("Record Deleted");
-            disciplineNameBox.setText("");
-            totalShotsBox.setText("");
-            numberOfPassesBox.setText("");
-            timeInMinutesBox.setText("");
-            distanceInMetersBox.setText("");
-            infosBox.setText("");
-        }
-        else
-            disciplineIdView.setText("Record not deleted.");
-    }
 }
