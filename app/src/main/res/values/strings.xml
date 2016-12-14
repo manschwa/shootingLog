@@ -18,7 +18,7 @@
     <string name="Not_assigned">Not assigned</string>
     <string name="name">Name</string>
     <string name="total_shots">Total Shots</string>
-    <string name="number_of_passes">Number of passes</string>
+    <string name="number_of_passes">Number of series</string>
     <string name="time_in_minutes">Time</string>
     <string name="distance_in_meters">Distance</string>
     <string name="infos">Infos</string>
@@ -38,4 +38,8 @@
     <string name="dialog_delete_discipline">Really delete this Discipline?</string>
     <string name="cancel">Cancel</string>
     <string name="dialog_delete_entry">Really delete this entry?</string>
+    <string name="minutes">Minutes</string>
+    <string name="meters">Meters</string>
+    <string name="series">Series</string>
+    <string name="shots">Shots</string>
 </resources>
