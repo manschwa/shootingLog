@@ -1,5 +1,7 @@
 package manschwa.shootinglog.event;
 
+import java.io.Serializable;
+
 /**
  * The Event class represents events (or categories) in which you achieved your result
  * (e.g. training, championship (local or national)).
@@ -7,7 +9,7 @@ package manschwa.shootinglog.event;
  *
  * Created by Manuel on 04.07.15.
  */
-public class Event {
+public class Event implements Serializable {
 
     /** The Event's ID. */
     private int id;

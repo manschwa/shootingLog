@@ -95,8 +95,8 @@ public class EventDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Event> findAllEvents() {
-        String query = "Select * FROM " + DatabaseContract.Event.TABLE_NAME +
-                " order by " + DatabaseContract.Event.COLUMN_NAME_NAME + " asc";
+        String query = "SELECT * FROM " + DatabaseContract.Event.TABLE_NAME +
+                " ORDER BY " + DatabaseContract.Event.COLUMN_NAME_NAME + " ASC";
 
         SQLiteDatabase db = this.getWritableDatabase();
 

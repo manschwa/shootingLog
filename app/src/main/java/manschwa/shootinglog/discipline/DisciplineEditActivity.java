@@ -53,13 +53,13 @@ public class DisciplineEditActivity extends AppCompatActivity implements DeleteD
     }
 
     private void initViews() {
-        disciplineIdView = (TextView) findViewById(R.id.disciplineID);
-        disciplineNameBox = (EditText) findViewById(R.id.disciplineName);
-        totalShotsBox = (EditText) findViewById(R.id.disciplineTotalShots);
-        numberOfPassesBox = (EditText) findViewById(R.id.disciplineNumberOfPasses);
-        timeInMinutesBox = (EditText) findViewById(R.id.disciplineTimeInMinutes);
+        disciplineIdView    = (TextView) findViewById(R.id.disciplineID);
+        disciplineNameBox   = (EditText) findViewById(R.id.disciplineName);
+        totalShotsBox       = (EditText) findViewById(R.id.disciplineTotalShots);
+        numberOfPassesBox   = (EditText) findViewById(R.id.disciplineNumberOfPasses);
+        timeInMinutesBox    = (EditText) findViewById(R.id.disciplineTimeInMinutes);
         distanceInMetersBox = (EditText) findViewById(R.id.disciplineDistanceInMeters);
-        infosBox = (EditText) findViewById(R.id.disciplineInfos);
+        infosBox            = (EditText) findViewById(R.id.disciplineInfos);
     }
 
 

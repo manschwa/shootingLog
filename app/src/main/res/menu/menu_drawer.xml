@@ -11,6 +11,11 @@
             android:title="@string/disciplines"/>
 
         <item
+            android:id="@+id/drawer_events"
+            android:icon="@drawable/ic_drawer_results"
+            android:title="@string/events"/>
+
+        <item
             android:id="@+id/drawer_settings"
             android:icon="@drawable/ic_drawer_settings"
             android:title="@string/settings"/>

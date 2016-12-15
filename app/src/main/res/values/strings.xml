@@ -42,4 +42,7 @@
     <string name="meters">Meters</string>
     <string name="series">Series</string>
     <string name="shots">Shots</string>
+    <string name="EventID">EventID</string>
+    <string name="Events">Events</string>
+    <string name="newEvent">New Event</string>
 </resources>

@@ -24,6 +24,7 @@ public class DisciplineDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DatabaseContract.Discipline.CREATE_TABLE);
+        db.execSQL(DatabaseContract.Event.CREATE_TABLE);
     }
 
     // Method is called during an upgrade of the database

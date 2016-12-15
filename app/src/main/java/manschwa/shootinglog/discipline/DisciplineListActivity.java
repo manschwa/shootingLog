@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 import manschwa.shootinglog.R;
+import manschwa.shootinglog.event.EventEditActivity;
+import manschwa.shootinglog.event.EventListActivity;
 
 /**
  * Created by Manuel on 13.07.15.
@@ -107,11 +109,22 @@ public class DisciplineListActivity extends AppCompatActivity implements Discipl
         view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
+                Intent intent;
                 switch (menuItem.getItemId()) {
                     case R.id.drawer_disciplines:
                         drawerLayout.openDrawer(GravityCompat.START);
                         Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
                         menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        intent = new Intent(DisciplineListActivity.this, DisciplineListActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.drawer_events:
+                        drawerLayout.openDrawer(GravityCompat.START);
+                        Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
+                        menuItem.setChecked(true);
+                        intent = new Intent(DisciplineListActivity.this, EventListActivity.class);
+                        startActivity(intent);
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.drawer_settings:
