@@ -2,6 +2,8 @@ package manschwa.shootinglog.event;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -16,6 +18,7 @@ import android.view.View;
 import java.util.List;
 import java.util.ArrayList;
 
+import manschwa.shootinglog.DrawerItemListener;
 import manschwa.shootinglog.R;
 /**
  * Created by root on 15.12.16.
@@ -39,6 +42,7 @@ public class EventListActivity extends AppCompatActivity implements EventListAda
         initRecyclerView();
         initFab();
         initToolbar();
+        setupDrawerLayout();
 
         content = findViewById(R.id.event_list_coordinator_layout);
     }
@@ -68,8 +72,9 @@ public class EventListActivity extends AppCompatActivity implements EventListAda
         final ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24px);
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
+//            actionBar.setHomeButtonEnabled(true);
         }
     }
 
@@ -78,14 +83,39 @@ public class EventListActivity extends AppCompatActivity implements EventListAda
         return eventDatabaseHelper.findAllEvents();
     }
 
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            // Respond to the action bar's Up/Home button
+//            case android.R.id.home:
+//                NavUtils.navigateUpFromSameTask(this);
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setupDrawerLayout() {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        // define the behaviour if clicked on a Drawer Layout Button
+        NavigationView view = (NavigationView) findViewById(R.id.navigation_view);
+        DrawerItemListener drawerItemListener = new DrawerItemListener(this, this.drawerLayout);
+        view.setNavigationItemSelectedListener(drawerItemListener);
+        view.getMenu().getItem(1).setChecked(true);
     }
 
     @Override public void onItemClick(View view, Event event) {

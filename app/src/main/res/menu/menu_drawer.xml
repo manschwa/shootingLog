@@ -6,13 +6,12 @@
 
         <item
             android:id="@+id/drawer_disciplines"
-            android:checked="true"
             android:icon="@drawable/ic_drawer_results"
             android:title="@string/disciplines"/>
 
         <item
             android:id="@+id/drawer_events"
-            android:icon="@drawable/ic_drawer_results"
+           android:icon="@drawable/ic_drawer_results"
             android:title="@string/events"/>
 
         <item

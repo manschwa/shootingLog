@@ -14,10 +14,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 
 import java.util.List;
 import java.util.ArrayList;
 
+import manschwa.shootinglog.DrawerItemListener;
 import manschwa.shootinglog.R;
 import manschwa.shootinglog.event.EventEditActivity;
 import manschwa.shootinglog.event.EventListActivity;
@@ -106,39 +108,9 @@ public class DisciplineListActivity extends AppCompatActivity implements Discipl
 
         // define the behaviour if clicked on a Drawer Layout Button
         NavigationView view = (NavigationView) findViewById(R.id.navigation_view);
-        view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                Intent intent;
-                switch (menuItem.getItemId()) {
-                    case R.id.drawer_disciplines:
-                        drawerLayout.openDrawer(GravityCompat.START);
-                        Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
-                        menuItem.setChecked(true);
-                        drawerLayout.closeDrawers();
-                        intent = new Intent(DisciplineListActivity.this, DisciplineListActivity.class);
-                        startActivity(intent);
-                        return true;
-                    case R.id.drawer_events:
-                        drawerLayout.openDrawer(GravityCompat.START);
-                        Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
-                        menuItem.setChecked(true);
-                        intent = new Intent(DisciplineListActivity.this, EventListActivity.class);
-                        startActivity(intent);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    case R.id.drawer_settings:
-                        drawerLayout.openDrawer(GravityCompat.START);
-                        Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
-                        menuItem.setChecked(true);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    default:
-                        return false;
-                }
-
-            }
-        });
+        DrawerItemListener drawerItemListener = new DrawerItemListener(this, this.drawerLayout);
+        view.setNavigationItemSelectedListener(drawerItemListener);
+        view.getMenu().getItem(0).setChecked(true);
     }
 
     @Override
@@ -148,11 +120,11 @@ public class DisciplineListActivity extends AppCompatActivity implements Discipl
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    @Override public void onItemClick(View view, Discipline discipline) {
+    @Override
+    public void onItemClick(View view, Discipline discipline) {
         Intent intent = new Intent(DisciplineListActivity.this, DisciplineEditActivity.class);
         intent.putExtra("Discipline", discipline);
         startActivity(intent);
