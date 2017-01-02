@@ -1,5 +1,6 @@
 package manschwa.shootinglog.result;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import manschwa.shootinglog.weapon.Weapon;
@@ -11,7 +12,7 @@ import manschwa.shootinglog.location.Location;
 /**
  * Created by Manuel on 04.07.15.
  */
-public class Result {
+public class Result implements Serializable {
 
     private int id;
     private Date date;

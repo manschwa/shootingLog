@@ -86,10 +86,9 @@ public class DisciplineListActivity extends AppCompatActivity implements Discipl
         final ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
-//            actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
-//            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black);
+            actionBar.setTitle("Disciplines");
 
         }
     }

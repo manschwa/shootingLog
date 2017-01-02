@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  */
 public final class DatabaseContract {
 
-    public static final  int    DATABASE_VERSION   = 2;
+    public static final  int    DATABASE_VERSION   = 5;
     public static final  String DATABASE_NAME      = "database.db";
     private static final String TEXT_TYPE          = " TEXT";
     private static final String INTEGER_TYPE       = " INTEGER";
@@ -27,7 +27,7 @@ public final class DatabaseContract {
         public static final String COLUMN_NAME_BATCH_NUMBER = "batch_number";
         public static final String COLUMN_NAME_MANUFACTURER = "manufacturer";
 
-        public static final String CREATE_TABLE = "CREATE TABLE " +
+        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " +
                 TABLE_NAME + " (" +
                 COLUMN_NAME_AMMUNITION_ID + " INTEGER PRIMARY KEY, " +
                 COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
@@ -48,7 +48,7 @@ public final class DatabaseContract {
         public static final String COLUMN_NAME_INFOS = "infos";
 
 
-        public static final String CREATE_TABLE = "CREATE TABLE " +
+        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " +
                 TABLE_NAME + " (" +
                 COLUMN_NAME_DISCIPLINE_ID + " INTEGER PRIMARY KEY, " +
                 COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
@@ -66,7 +66,7 @@ public final class DatabaseContract {
         public static final String COLUMN_NAME_EVENT_ID = "event_id";
         public static final String COLUMN_NAME_NAME = "name";
 
-        public static final String CREATE_TABLE = "CREATE TABLE " +
+        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " +
                 TABLE_NAME + " (" +
                 COLUMN_NAME_EVENT_ID + " INTEGER PRIMARY KEY, " +
                 COLUMN_NAME_NAME + TEXT_TYPE + " )";
@@ -80,7 +80,7 @@ public final class DatabaseContract {
         public static final String COLUMN_NAME_NAME = "name";
         public static final String COLUMN_NAME_ADDRESS = "address";
 
-        public static final String CREATE_TABLE = "CREATE TABLE " +
+        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " +
                 TABLE_NAME + " (" +
                 COLUMN_NAME_LOCATION_ID + " INTEGER PRIMARY KEY, " +
                 COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
@@ -94,7 +94,7 @@ public final class DatabaseContract {
         public static final String COLUMN_NAME_MANUFACTURER_ID = "manufacturer_id";
         public static final String COLUMN_NAME_NAME = "name";
 
-        public static final String CREATE_TABLE = "CREATE TABLE " +
+        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " +
                 TABLE_NAME + " (" +
                 COLUMN_NAME_MANUFACTURER_ID + " INTEGER PRIMARY KEY, " +
                 COLUMN_NAME_NAME + TEXT_TYPE + " )";
@@ -110,7 +110,7 @@ public final class DatabaseContract {
         public static final String COLUMN_NAME_MODEL = "model";
         public static final String COLUMN_NAME_MANUFACTURER = "manufacturer";
 
-        public static final String CREATE_TABLE = "CREATE TABLE " +
+        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " +
                 TABLE_NAME + " (" +
                 COLUMN_NAME_WEAPON_ID + " INTEGER PRIMARY KEY, " +
                 COLUMN_NAME_SERIAL_NUMBER + INTEGER_TYPE + COMMA_SEP +

@@ -127,7 +127,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
         return locations;
     }
 
-    public boolean updateLocations(Location location) {
+    public boolean updateLocation(Location location) {
         ContentValues values = setValues(location);
         SQLiteDatabase db = this.getWritableDatabase();
 

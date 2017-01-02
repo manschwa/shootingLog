@@ -45,4 +45,10 @@
     <string name="EventID">EventID</string>
     <string name="Events">Events</string>
     <string name="newEvent">New Event</string>
+    <string name="ManufacturerID">ManufacturerID</string>
+    <string name="newManufacturer">New Manufacturer</string>
+    <string name="LocationID">LocationID</string>
+    <string name="newLocation">New Location</string>
+    <string name="address">Address</string>
+    <string name="street_city">Street, City</string>
 </resources>

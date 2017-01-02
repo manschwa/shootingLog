@@ -1,11 +1,13 @@
 package manschwa.shootinglog.manufacturer;
 
+import java.io.Serializable;
+
 /**
  * The Manufacturer class represents a manufacturer for either Weapons or Ammunition.
  *
  * Created by Manuel on 04.07.15.
  */
-public class Manufacturer {
+public class Manufacturer implements Serializable {
 
     private int id;
     private String name;

@@ -29,8 +29,10 @@ public class ManufacturerDatabaseHelper extends SQLiteOpenHelper {
     // Method is called during an upgrade of the database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(DatabaseContract.Manufacturer.DELETE_TABLE);
-        onCreate(db);
+        if (newVersion > oldVersion) {
+            db.execSQL(DatabaseContract.Manufacturer.DELETE_TABLE);
+            onCreate(db);
+        }
     }
 
     public ContentValues setValues(Manufacturer manufacturer) {
@@ -123,7 +125,7 @@ public class ManufacturerDatabaseHelper extends SQLiteOpenHelper {
         return manufacturers;
     }
 
-    public boolean updateManufacturers(Manufacturer manufacturer) {
+    public boolean updateManufacturer(Manufacturer manufacturer) {
         ContentValues values = setValues(manufacturer);
         SQLiteDatabase db = this.getWritableDatabase();
 

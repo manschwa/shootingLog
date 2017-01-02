@@ -1,4 +1,5 @@
-package manschwa.shootinglog.event;
+package manschwa.shootinglog.location;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,13 +20,13 @@ import java.util.ArrayList;
 
 import manschwa.shootinglog.DrawerItemListener;
 import manschwa.shootinglog.R;
+
 /**
- * Created by root on 15.12.16.
+ * Created by root on 02.01.17.
  */
+public class LocationListActivity extends AppCompatActivity implements LocationListAdapter.OnItemClickListener {
 
-public class EventListActivity extends AppCompatActivity implements EventListAdapter.OnItemClickListener {
-
-    private List<Event> events = new ArrayList<>();
+    private List<Location> locations = new ArrayList<>();
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -34,31 +35,31 @@ public class EventListActivity extends AppCompatActivity implements EventListAda
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_list);
+        setContentView(R.layout.activity_location_list);
 
-        this.events = getAllEvents();
+        this.locations = getAllLocations();
 
         initRecyclerView();
         initFab();
         initToolbar();
         setupDrawerLayout();
 
-        content = findViewById(R.id.event_list_coordinator_layout);
+        content = findViewById(R.id.location_list_coordinator_layout);
     }
 
     private void initRecyclerView() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.event_list_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.location_list_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        EventListAdapter eventListAdapter = new EventListAdapter(this.events);
-        eventListAdapter.setOnItemClickListener(this);
-        recyclerView.setAdapter(eventListAdapter);
+        LocationListAdapter locationListAdapter = new LocationListAdapter(this.locations);
+        locationListAdapter.setOnItemClickListener(this);
+        recyclerView.setAdapter(locationListAdapter);
     }
 
     private void initFab() {
         findViewById(R.id.fab_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EventListActivity.this, EventEditActivity.class);
+                Intent intent = new Intent(LocationListActivity.this, LocationEditActivity.class);
 
                 startActivity(intent);
             }
@@ -76,9 +77,9 @@ public class EventListActivity extends AppCompatActivity implements EventListAda
         }
     }
 
-    private List<Event> getAllEvents() {
-        EventDatabaseHelper eventDatabaseHelper = new EventDatabaseHelper(this);
-        return eventDatabaseHelper.findAllEvents();
+    private List<Location> getAllLocations() {
+        LocationDatabaseHelper locationDatabaseHelper = new LocationDatabaseHelper(this);
+        return locationDatabaseHelper.findAllLocations();
     }
 
     @Override
@@ -106,9 +107,10 @@ public class EventListActivity extends AppCompatActivity implements EventListAda
         view.getMenu().getItem(1).setChecked(true);
     }
 
-    @Override public void onItemClick(View view, Event event) {
-        Intent intent = new Intent(EventListActivity.this, EventEditActivity.class);
-        intent.putExtra("Event", event);
+    @Override
+    public void onItemClick(View view, Location location) {
+        Intent intent = new Intent(LocationListActivity.this, LocationEditActivity.class);
+        intent.putExtra("Location", location);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.scale_in);
     }

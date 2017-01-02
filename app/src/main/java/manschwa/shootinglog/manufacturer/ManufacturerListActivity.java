@@ -1,4 +1,4 @@
-package manschwa.shootinglog.event;
+package manschwa.shootinglog.manufacturer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,12 +20,12 @@ import java.util.ArrayList;
 import manschwa.shootinglog.DrawerItemListener;
 import manschwa.shootinglog.R;
 /**
- * Created by root on 15.12.16.
+ * Created by root on 29.12.16.
  */
 
-public class EventListActivity extends AppCompatActivity implements EventListAdapter.OnItemClickListener {
+public class ManufacturerListActivity extends AppCompatActivity implements ManufacturerListAdapter.OnItemClickListener {
 
-    private List<Event> events = new ArrayList<>();
+    private List<Manufacturer> manufacturers = new ArrayList<>();
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -34,31 +34,31 @@ public class EventListActivity extends AppCompatActivity implements EventListAda
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_list);
+        setContentView(R.layout.activity_manufacturer_list);
 
-        this.events = getAllEvents();
+        this.manufacturers = getAllManufacturers();
 
         initRecyclerView();
         initFab();
         initToolbar();
         setupDrawerLayout();
 
-        content = findViewById(R.id.event_list_coordinator_layout);
+        content = findViewById(R.id.manufacturer_list_coordinator_layout);
     }
 
     private void initRecyclerView() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.event_list_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.manufacturer_list_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        EventListAdapter eventListAdapter = new EventListAdapter(this.events);
-        eventListAdapter.setOnItemClickListener(this);
-        recyclerView.setAdapter(eventListAdapter);
+        ManufacturerListAdapter manufacturerListAdapter = new ManufacturerListAdapter(this.manufacturers);
+        manufacturerListAdapter.setOnItemClickListener(this);
+        recyclerView.setAdapter(manufacturerListAdapter);
     }
 
     private void initFab() {
         findViewById(R.id.fab_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EventListActivity.this, EventEditActivity.class);
+                Intent intent = new Intent(ManufacturerListActivity.this, ManufacturerEditActivity.class);
 
                 startActivity(intent);
             }
@@ -76,9 +76,9 @@ public class EventListActivity extends AppCompatActivity implements EventListAda
         }
     }
 
-    private List<Event> getAllEvents() {
-        EventDatabaseHelper eventDatabaseHelper = new EventDatabaseHelper(this);
-        return eventDatabaseHelper.findAllEvents();
+    private List<Manufacturer> getAllManufacturers() {
+        ManufacturerDatabaseHelper manufacturerDatabaseHelper = new ManufacturerDatabaseHelper(this);
+        return manufacturerDatabaseHelper.findAllManufacturers();
     }
 
     @Override
@@ -103,12 +103,12 @@ public class EventListActivity extends AppCompatActivity implements EventListAda
         NavigationView view = (NavigationView) findViewById(R.id.navigation_view);
         DrawerItemListener drawerItemListener = new DrawerItemListener(this, this.drawerLayout);
         view.setNavigationItemSelectedListener(drawerItemListener);
-        view.getMenu().getItem(1).setChecked(true);
+        view.getMenu().getItem(2).setChecked(true);
     }
 
-    @Override public void onItemClick(View view, Event event) {
-        Intent intent = new Intent(EventListActivity.this, EventEditActivity.class);
-        intent.putExtra("Event", event);
+    @Override public void onItemClick(View view, Manufacturer manufacturer) {
+        Intent intent = new Intent(ManufacturerListActivity.this, ManufacturerEditActivity.class);
+        intent.putExtra("Manufacturer", manufacturer);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.scale_in);
     }

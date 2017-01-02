@@ -1,5 +1,7 @@
 package manschwa.shootinglog.ammunition;
 
+import java.io.Serializable;
+
 import manschwa.shootinglog.manufacturer.Manufacturer;
 
 /**
@@ -8,7 +10,7 @@ import manschwa.shootinglog.manufacturer.Manufacturer;
  *
  * Created by Manuel on 04.07.15.
  */
-public class Ammunition {
+public class Ammunition implements Serializable {
 
     private int id;
     private int batchNumber;

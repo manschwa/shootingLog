@@ -1,9 +1,11 @@
 package manschwa.shootinglog.location;
 
+import java.io.Serializable;
+
 /**
  * Created by Manuel on 04.07.15.
  */
-public class Location {
+public class Location implements Serializable {
 
     private int id;
     private String name;
